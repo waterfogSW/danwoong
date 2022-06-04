@@ -1,0 +1,1 @@
+web: java -jar build/libs/danwoong-0.0.1-SANPSHOT.jar
