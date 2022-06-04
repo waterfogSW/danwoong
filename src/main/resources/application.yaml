@@ -2,3 +2,6 @@ facebook-application:
   access-token: "EAAGDFS0xZCVABABxsGqKvNbApxymH5Tmh1tdLRoJrsrDfZC63ktEM5JfcJ8uv9PhZCYPiLXzXZCnILTwUZBklnnsXtFrNRbcwn8WUkuQX8toA3zEjFNHzkxJg4nIh463Hze9YOLMO5sAKKgRyLzq9ZAZCZBmfEi9ydS6fVGJeLCFjX8jerQwXi6Y7A2pZCQXNssaAWZAlXiCwY9AZDZD"
   verify-token: "verify123"
   message-url: "https://graph.facebook.com/v2.6/me/messages?access_token="
+
+server:
+  port: {$PORT:8080}
