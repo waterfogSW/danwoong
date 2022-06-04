@@ -1,5 +1,5 @@
 facebook-application:
-  access-token: "EAAGDFS0xZCVABAAh9S9JBVcjrvP83TAeIJuDqxWExueIIfMi0F0AiOmPlgfjCIHO7bNbIueRWMTTjQEuSBHjONx3Obeqi8oCLlZCXBBOowoiNRiKPuMYjJXqJy4TXUbDV3c5NVVZBw5O2u8EKACci9Mv94GFZCWorR0bfZA80fl7zcaKi9ZBOvxx38OLoL9ZCheUQU7cpR3uwZDZD"
+  access-token: "EAAGDFS0xZCVABADjw7SfImoaTDZCxI3gXvX8vQ9lLBOcdflBONl6mTO3mVuQbzqyJL7BrsGrYh8EmKyBDbYVZBeAJm5crEWS7RTwqqCMAPmMAsLCOqku1R9Ap15q5zD369zBKMRIXSUxZBcDDW0NfzqoCoMPD3jydrFELhKW29rm3cdRGWGkMzHZCNhK5P0JdiueCPwfLXwZDZD"
   verify-token: "verify123"
   message-url: "https://graph.facebook.com/v2.6/me/messages?access_token="
 
