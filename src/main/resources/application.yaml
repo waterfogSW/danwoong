@@ -2,6 +2,11 @@ facebook-application:
   access-token: "dummy"
   verify-token: "dummy"
   message-url: "https://graph.facebook.com/v2.6/me/messages?access_token="
+  
+dialogflow-application:
+  project-id: "dku-sir-bot-ihdl"
+  session-id: "123456789"
+  language-code: "ko-KR"
 
 server:
   port: { $PORT:8080 }
