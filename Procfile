@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/danwoong-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar -Dfacebook-application.access-token=${FACEBOOK_ACCESS_TOKEN} -Dfacebook-application.verify-token=${FACEBOOK_VERIFY_TOKEN} build/libs/danwoong-0.0.1-SNAPSHOT.jar
