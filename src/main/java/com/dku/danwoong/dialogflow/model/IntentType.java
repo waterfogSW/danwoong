@@ -1,4 +1,4 @@
-package com.dku.danwoong.dialogflow.Intent;
+package com.dku.danwoong.dialogflow.model;
 
 public enum IntentType {
     SAVE_RECORD,

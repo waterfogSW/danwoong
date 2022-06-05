@@ -1,6 +1,6 @@
 package com.dku.danwoong.dialogflow.service;
 
-import com.dku.danwoong.dialogflow.Intent.DialogflowIntent;
+import com.dku.danwoong.dialogflow.model.DialogflowIntent;
 import com.dku.danwoong.dialogflow.utils.DetectIntentTexts;
 import com.dku.danwoong.dialogflow.utils.IntentConverter;
 import com.google.cloud.dialogflow.v2.QueryResult;

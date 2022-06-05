@@ -1,4 +1,4 @@
-package com.dku.danwoong.dialogflow.Intent;
+package com.dku.danwoong.dialogflow.model;
 
 import com.dku.danwoong.record.entity.ActivityType;
 import org.springframework.util.Assert;

@@ -1,8 +1,8 @@
 package com.dku.danwoong.dialogflow.utils;
 
-import com.dku.danwoong.dialogflow.Intent.DialogflowIntent;
-import com.dku.danwoong.dialogflow.Intent.DialogflowLookupIntent;
-import com.dku.danwoong.dialogflow.Intent.DialogflowSaveIntent;
+import com.dku.danwoong.dialogflow.model.DialogflowIntent;
+import com.dku.danwoong.dialogflow.model.DialogflowLookupIntent;
+import com.dku.danwoong.dialogflow.model.DialogflowSaveIntent;
 import com.dku.danwoong.record.entity.ActivityType;
 import com.google.cloud.dialogflow.v2.QueryResult;
 import com.google.protobuf.Value;
