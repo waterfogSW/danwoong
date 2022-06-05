@@ -1,7 +1,7 @@
 package com.dku.danwoong.dialogflow.service;
 
-import com.dku.danwoong.dialogflow.model.DialogflowIntent;
+import com.google.cloud.dialogflow.v2.QueryResult;
 
 public interface DialogflowService {
-    DialogflowIntent getIntent(String text);
+    QueryResult getIntent(String text);
 }

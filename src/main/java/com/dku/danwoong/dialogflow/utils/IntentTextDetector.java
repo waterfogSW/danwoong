@@ -2,15 +2,17 @@ package com.dku.danwoong.dialogflow.utils;
 
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.dialogflow.v2.*;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
 
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
-public class DetectIntentTexts {
+@Component
+public class IntentTextDetector {
 
-    public static QueryResult detectIntentTexts(
+    public QueryResult detect(
             String projectId, String text, String sessionId, String languageCode)
             throws IOException, ApiException {
 
