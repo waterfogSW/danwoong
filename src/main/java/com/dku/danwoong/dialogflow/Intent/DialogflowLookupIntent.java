@@ -7,7 +7,7 @@ import javax.persistence.Enumerated;
 import java.time.LocalDate;
 
 public class DialogflowLookupIntent extends DialogflowIntent {
-    @Enumerated(EnumType.STRING)
+
     private final ActivityType activityType;
 
     private final LocalDate date;

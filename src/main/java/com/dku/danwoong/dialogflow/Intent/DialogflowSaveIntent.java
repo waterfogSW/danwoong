@@ -2,12 +2,10 @@ package com.dku.danwoong.dialogflow.Intent;
 
 import com.dku.danwoong.record.entity.ActivityType;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 public class DialogflowSaveIntent extends DialogflowIntent {
-    @Enumerated(EnumType.STRING)
+
     private final ActivityType activityType;
 
     private final LocalDateTime startTime;
