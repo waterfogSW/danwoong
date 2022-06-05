@@ -1,5 +1,7 @@
 package com.dku.danwoong.message.service;
 
+import com.dku.danwoong.user.model.Provider;
+
 public interface MessageService {
-    String process(String id, String message);
+    String doOperation(Provider provider, String id, String message);
 }

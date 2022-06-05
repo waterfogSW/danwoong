@@ -3,6 +3,7 @@ package com.dku.danwoong.facebook.v1.controller;
 import com.dku.danwoong.facebook.v1.controller.dto.FacebookHookRequest;
 import com.dku.danwoong.facebook.v1.controller.dto.FacebookMessageResponse;
 import com.dku.danwoong.message.service.MessageService;
+import com.dku.danwoong.user.model.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,7 +64,7 @@ public class MessengerController {
         request.entry().forEach(e -> e.messaging().forEach(m -> {
             String id = m.sender().get("id");
             String content = m.message().text();
-            String result = messageService.process(id, content);
+            String result = messageService.doOperation(Provider.FACEBOOK, id, content);
             sendReply(id, result);
         }));
     }
