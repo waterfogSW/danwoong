@@ -15,4 +15,8 @@ public class Calender {
     private LocalDate date;
 
     private String name;
+
+    public LocalDate getDate() {
+        return date;
+    }
 }

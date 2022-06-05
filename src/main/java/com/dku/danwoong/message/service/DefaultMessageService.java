@@ -48,9 +48,10 @@ public class DefaultMessageService implements MessageService {
                 responseText.append(result);
             }
             case CALENDER -> {
-                final var result = beanFactory.getBean(messageType.toString(), CalenderStrategy.class);
+                final var result = beanFactory.getBean(messageType.toString(), CalenderStrategy.class)
+                        .doOperation(userId, queryResult);
+                responseText.append(result);
             }
-
         }
 
         return responseText.toString();
