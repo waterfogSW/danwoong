@@ -28,11 +28,11 @@ public class DefaultMessageService implements MessageService {
     }
 
     @Override
-    public String doOperation(Provider provider, String id, String message) {
-        Assert.isTrue(isNotEmpty(id), "Id must be provided");
-        Assert.isTrue(isNotEmpty(id), "Message must be provided");
+    public String doOperation(Provider provider, String senderId, String message) {
+        Assert.isTrue(isNotEmpty(senderId), "SenderId must be provided");
+        Assert.isTrue(isNotEmpty(message), "Message must be provided");
 
-        final var userId = userService.getUserId(provider, id);
+        final var userId = userService.getUserId(provider, senderId);
         final var queryResult = dialogflowService.query(message);
         final var messageType = MessageType.from(queryResult.getIntent().getDisplayName());
 
