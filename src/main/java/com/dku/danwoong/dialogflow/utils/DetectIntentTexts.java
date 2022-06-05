@@ -1,52 +1,40 @@
 package com.dku.danwoong.dialogflow.utils;
 
-
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.dialogflow.v2.*;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
 
+import static org.apache.logging.log4j.util.Strings.isNotEmpty;
+
 public class DetectIntentTexts {
 
-    // DialogFlow API Detect Intent sample with text inputs.
     public static QueryResult detectIntentTexts(
             String projectId, String text, String sessionId, String languageCode)
             throws IOException, ApiException {
 
-        // Instantiates a client
+        Assert.isTrue(isNotEmpty(projectId), "ProjectId must be provided");
+        Assert.isTrue(isNotEmpty(text), "Text must be provided");
+        Assert.isTrue(isNotEmpty(sessionId), "SessionId must be provided");
+        Assert.isTrue(isNotEmpty(languageCode), "LanguageCode must be provided");
 
-        try (SessionsClient sessionsClient = SessionsClient.create()) {
+        // Instantiates a client
+        try (final var sessionsClient = SessionsClient.create()) {
             // Set the session nam
             // e using the sessionId (UUID) and projectID (my-project-id)
-            SessionName session = SessionName.of(projectId, sessionId);
-            System.out.println("Session Path: " + session.toString());
+            final var session = SessionName.of(projectId, sessionId);
 
             // Set the text (hello) and language code (en-US) for the query
-            TextInput.Builder textInput =
-                    TextInput.newBuilder().setText(text).setLanguageCode(languageCode);
+            final var textInput = TextInput.newBuilder().setText(text).setLanguageCode(languageCode);
 
             // Build the query with the TextInput
-            QueryInput queryInput = QueryInput.newBuilder().setText(textInput).build();
+            final var queryInput = QueryInput.newBuilder().setText(textInput).build();
 
             // Performs the detect intent request
-            DetectIntentResponse response = sessionsClient.detectIntent(session, queryInput);
+            final var response = sessionsClient.detectIntent(session, queryInput);
 
-            // Display the query result
-            QueryResult queryResult = response.getQueryResult();
-
-            System.out.println("====================");
-            System.out.format("Query Text: '%s'\n", queryResult.getQueryText());
-            System.out.format(
-                    "Detected Intent: %s (confidence: %f)\n",
-                    queryResult.getIntent().getDisplayName(), queryResult.getIntentDetectionConfidence());
-            System.out.format(
-                    "Fulfillment Text: '%s'\n",
-                    queryResult.getFulfillmentMessagesCount() > 0
-                            ? queryResult.getFulfillmentMessages(0).getText()
-                            : "Triggered Default Fallback Intent");
-
-            return queryResult;
+            return response.getQueryResult();
         }
     }
 }
-// [END dialogflow_detect_intent_text]

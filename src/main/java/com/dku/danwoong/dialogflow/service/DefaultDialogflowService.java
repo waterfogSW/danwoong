@@ -8,8 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
+
+import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 @Service
 public class DefaultDialogflowService implements DialogflowService {
@@ -33,6 +36,8 @@ public class DefaultDialogflowService implements DialogflowService {
 
     @Override
     public DialogflowIntent getIntent(String text) {
+        Assert.isTrue(isNotEmpty(text), "Text must be provided");
+
         try {
             QueryResult queryResult = DetectIntentTexts.detectIntentTexts(projectId, text, sessionId, languageCode);
             return intentConverter.queryResultToIntent(queryResult);
