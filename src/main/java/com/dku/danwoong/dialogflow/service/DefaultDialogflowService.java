@@ -17,7 +17,7 @@ public class DefaultDialogflowService implements DialogflowService {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultDialogflowService.class);
     private final IntentTextDetector intentTextDetector;
-    
+
     @Value("${dialogflow-application.project-id}")
     private String projectId;
     @Value("${dialogflow-application.session-id}")
@@ -30,7 +30,7 @@ public class DefaultDialogflowService implements DialogflowService {
     }
 
     @Override
-    public QueryResult getIntent(String text) {
+    public QueryResult query(String text) {
         Assert.isTrue(isNotEmpty(text), "Text must be provided");
 
         try {
