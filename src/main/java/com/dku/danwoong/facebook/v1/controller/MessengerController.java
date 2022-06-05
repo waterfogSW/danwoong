@@ -2,6 +2,7 @@ package com.dku.danwoong.facebook.v1.controller;
 
 import com.dku.danwoong.facebook.v1.controller.dto.FacebookHookRequest;
 import com.dku.danwoong.facebook.v1.controller.dto.FacebookMessageResponse;
+import com.dku.danwoong.message.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,12 @@ public class MessengerController {
     private static final Logger log = LoggerFactory.getLogger(MessengerController.class);
 
     private final RestTemplate template = new RestTemplate();
+
+    private final MessageService messageService;
+
+    public MessengerController(MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     @Value("${facebook-application.message-url}")
     private String messageUrl;
@@ -56,16 +63,17 @@ public class MessengerController {
         request.entry().forEach(e -> e.messaging().forEach(m -> {
             String id = m.sender().get("id");
             String content = m.message().text();
-
-            sendReply(id, "This is a test message");
+            String result = messageService.process(id, content);
+            sendReply(id, result);
         }));
     }
 
     private void sendReply(String id, String text) {
-        FacebookMessageResponse response = new FacebookMessageResponse("text");
+        final var response = new FacebookMessageResponse("text");
         response.recipient().put("id", id);
         response.message().put("text", text);
-        HttpEntity<FacebookMessageResponse> entity = new HttpEntity<>(response);
+        final var entity = new HttpEntity<>(response);
+
         String result = template.postForEntity(messageUrl + accessToken, entity, String.class).getBody();
         log.info("Message result: {}", result);
     }
