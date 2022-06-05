@@ -2,6 +2,7 @@ package com.dku.danwoong.message.service;
 
 import com.dku.danwoong.dialogflow.service.DialogflowService;
 import com.dku.danwoong.message.model.MessageType;
+import com.dku.danwoong.message.strategy.CalenderStrategy;
 import com.dku.danwoong.message.strategy.LookupRecordStrategy;
 import com.dku.danwoong.message.strategy.SaveRecordStrategy;
 import com.dku.danwoong.user.model.Provider;
@@ -46,6 +47,10 @@ public class DefaultMessageService implements MessageService {
                         .doOperation(userId, queryResult);
                 responseText.append(result);
             }
+            case CALENDER -> {
+                final var result = beanFactory.getBean(messageType.toString(), CalenderStrategy.class);
+            }
+
         }
 
         return responseText.toString();
