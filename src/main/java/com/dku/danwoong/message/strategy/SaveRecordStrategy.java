@@ -4,6 +4,8 @@ import com.dku.danwoong.record.entity.ActivityType;
 import com.dku.danwoong.record.entity.Record;
 import com.dku.danwoong.record.service.RecordService;
 import com.google.cloud.dialogflow.v2.QueryResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -13,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class SaveRecordStrategy implements MessageStrategy {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+    private static final Logger log = LoggerFactory.getLogger(SaveRecordStrategy.class);
 
     private final RecordService recordService;
 
@@ -24,12 +27,42 @@ public class SaveRecordStrategy implements MessageStrategy {
     public String doOperation(Long userId, QueryResult queryResult) {
         final var fieldsMap = queryResult.getParameters().getFieldsMap();
 
-        final var startTime = LocalDateTime.parse(fieldsMap.get("startTime").getStringValue(), formatter);
-        final var endTime = LocalDateTime.parse(fieldsMap.get("endTime").getStringValue(), formatter);
-        final var activityType = ActivityType.from(fieldsMap.get("categoryName").getStringValue());
+        final var count = fieldsMap.get("categoryName").getListValue().getValuesCount();
 
-        final var newRecord = new Record(userId, startTime, endTime, activityType);
-        recordService.save(newRecord);
+        for (int i = 0; i < count; i++) {
+            final var categoryName = fieldsMap.get("categoryName")
+                    .getListValue()
+                    .getValues(i)
+                    .getStringValue();
+
+            final var dateTime = fieldsMap.get("dateTime").getListValue();
+
+            final var startDateTime = LocalDateTime.parse(
+                    dateTime.getValues(i)
+                            .getStructValue()
+                            .getFieldsMap()
+                            .get("startDateTime")
+                            .getStringValue(), formatter
+            );
+
+            final var endDateTime = LocalDateTime.parse(
+                    dateTime.getValues(i)
+                            .getStructValue()
+                            .getFieldsMap()
+                            .get("endDateTime")
+                            .getStringValue(), formatter
+            );
+
+            log.info("UserId : {}, startTime : {}, endTime : {}, ActivityType : {}",
+                    userId,
+                    startDateTime,
+                    endDateTime,
+                    categoryName
+            );
+
+            final var newRecord = new Record(userId, startDateTime, endDateTime, ActivityType.from(categoryName));
+            recordService.save(newRecord);
+        }
         return "";
     }
 }

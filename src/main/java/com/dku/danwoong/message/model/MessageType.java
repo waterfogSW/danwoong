@@ -2,6 +2,7 @@ package com.dku.danwoong.message.model;
 
 public enum MessageType {
     WELCOME,
+    RECORDS,
     SAVE_RECORD,
     LOOKUP_RECORD,
     UNKNOWN_INTENT;

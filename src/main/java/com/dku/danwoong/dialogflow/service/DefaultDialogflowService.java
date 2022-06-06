@@ -6,11 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.io.IOException;
-
-import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 @Service
 public class DefaultDialogflowService implements DialogflowService {
