@@ -30,7 +30,10 @@ public class DefaultMessageService implements MessageService {
     @Override
     public String doOperation(Provider provider, String senderId, String message) {
         Assert.isTrue(isNotEmpty(senderId), "SenderId must be provided");
-        Assert.isTrue(isNotEmpty(message), "Message must be provided");
+
+        if (message == null || message.isBlank()) {
+            return "무슨 말씀이신지 잘 모르겠어요";
+        }
 
         final var userId = userService.getUserId(provider, senderId);
         final var queryResult = dialogflowService.query(message);

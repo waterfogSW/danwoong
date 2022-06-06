@@ -31,8 +31,6 @@ public class DefaultDialogflowService implements DialogflowService {
 
     @Override
     public QueryResult query(String text) {
-        Assert.isTrue(isNotEmpty(text), "Text must be provided");
-
         try {
             return intentTextDetector.detect(projectId, text, sessionId, languageCode);
         } catch (IOException e) {
