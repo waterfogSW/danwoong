@@ -11,6 +11,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import static org.apache.logging.log4j.util.Strings.isEmpty;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 @Service
@@ -31,8 +32,9 @@ public class DefaultMessageService implements MessageService {
     @Override
     public String doOperation(Provider provider, String senderId, String message) {
         Assert.isTrue(isNotEmpty(senderId), "SenderId must be provided");
+        Assert.notNull(provider, "Provider must be provided");
 
-        if (message == null || message.isBlank()) {
+        if (isEmpty(message)) {
             return DefaultMessage.BLANK_MESSAGE_RESPONSE;
         }
 
