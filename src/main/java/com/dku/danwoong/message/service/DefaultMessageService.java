@@ -1,6 +1,7 @@
 package com.dku.danwoong.message.service;
 
 import com.dku.danwoong.dialogflow.service.DialogflowService;
+import com.dku.danwoong.message.model.DefaultMessage;
 import com.dku.danwoong.message.model.MessageType;
 import com.dku.danwoong.message.strategy.LookupRecordStrategy;
 import com.dku.danwoong.message.strategy.SaveRecordStrategy;
@@ -32,7 +33,7 @@ public class DefaultMessageService implements MessageService {
         Assert.isTrue(isNotEmpty(senderId), "SenderId must be provided");
 
         if (message == null || message.isBlank()) {
-            return "무슨 말씀이신지 잘 모르겠어요";
+            return DefaultMessage.BLANK_MESSAGE_RESPONSE;
         }
 
         final var userId = userService.getUserId(provider, senderId);
